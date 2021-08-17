@@ -25,6 +25,25 @@
           </div>
         </div>
       </div>
+
+      <div
+      *ngIf="item$ | async as item"
+      class="list-group-item list-group-item-action flex-column align-items-start border-0"
+      >
+      <!-- このasyncパイプは、ngIf！そして、展開するときは,asを使い、このdiv内でのみ使用可能。 -->
+        <div class="media">
+          <div
+          class="media-left">
+            <a href="#" class="icon"></a>
+          </div>
+          <div class="media-body">
+            <div class="d-flex w-100 justify-content-between">
+              <h4 class="media-heading">{{item.name}}</h4>
+            </div>
+            <pre>{{item.message}}</pre>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -34,7 +53,7 @@
         <span class="input-group-btn">
           <button
           (click)="addComment(comment);comment=''"
-           class="btn btn-info btn-sm"
+          class="btn btn-info btn-sm"
             type="submit"
             tabindex="2"
             >送信

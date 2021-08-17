@@ -1,5 +1,7 @@
 import { ThisReceiver } from '@angular/compiler';
 import { Component } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { Observable } from 'rxjs';
 
 import { Comment } from './class/comment';
 import { User } from './class/user';
@@ -23,6 +25,12 @@ export class AppComponent {
   comments = COMMENTS;
   currentUser = CURRENT_USER;
   comment = "";
+  item$: Observable<any>;
+
+  constructor(private db: AngularFireDatabase) {
+    this.item$ = db.object('/item').valueChanges();
+    // これを指定することで、リアルタイムデータベースでitemから単一データを取得できて、observableに変える。
+  }
 
   addComment(comment: string) {
     if (comment) {

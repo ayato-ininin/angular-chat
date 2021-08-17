@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "angular-chat-85006": {
+      "hosting": {
+        "angular-chat": [
+          "angular-chat-85006"
+        ]
+      }
+    }
+  }
+}
