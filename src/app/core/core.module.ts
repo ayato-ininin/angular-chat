@@ -10,6 +10,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../../environments/environment';
 import { HeaderComponent } from './components/header/header.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -22,6 +23,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
   // headerComponentも、全部に共通するから、一度しか読み込まん。だからcoreModuleに入れるべき。
   imports: [
     CommonModule,
+    RouterModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFireDatabaseModule

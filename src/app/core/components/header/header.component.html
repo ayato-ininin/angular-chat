@@ -1,4 +1,10 @@
 <nav class="navbar justify-content-between fixed-top navbar-inverse bg-light text-dark">
-  <a href="#" class="navbar-brand text-dark">Angular Chat</a>
-  <a href="#" class="navbar-text text-dark">Login</a>
+  <a routerLink="/" href="#" class="navbar-brand text-dark">Angular Chat</a>
+  <a
+  *ngIf="!isLogin"
+   routerLink="/signup" href="#" class="navbar-text text-dark">SignUp</a>
+   <a
+  *ngIf="isLogin"
+   routerLink="/" href="#" class="navbar-text text-dark"
+   (click)="logout()">Logout</a>
 </nav>
