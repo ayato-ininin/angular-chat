@@ -18,7 +18,7 @@ export class UserService {
       .then((credential) => {
         const { user } = credential;
         const actionCodeSettings = {
-          url: `http://localhost:4200/?newAccount=true&email=${user!.email}`
+          url: `http://localhost:4200/?newAccount=true&email=${user.email}`
         };
         user.sendEmailVerification(actionCodeSettings);
         // this.db.object(`/users/${user!.uid}`).set({ uid: user!.uid, email: user!.email });
@@ -38,12 +38,10 @@ export class UserService {
     return this.afAuth.currentUser.then((user: firebase.User | null) => {
       // そのuserデータを取ってくる。
       if (user) {
-        this.Initial = values.displayName.slice(0, 1);
         user.updateProfile(values)
-
           // ↑ここでまず、authentificationにデータを保存
           .then(() => this.db.object(`/users/${user.uid}`).update(values))
-          .then(() => this.db.object(`/users/${user.uid}`).update({ initial: this.Initial}))
+          // .then(() => this.db.object(`/users/${user.uid}`).update({ initial: this.Initial}))
           // ↑そんで、ここでリアルタイムデータベースにも保存して、二回保存
           .catch(error => console.error(error));
       }

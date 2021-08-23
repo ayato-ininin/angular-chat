@@ -3,12 +3,17 @@ export class User {
   email: string;
   photoURL: string;
   uid: string;
-  initial?: string;
+  initial: string;
   constructor(user: firebase.User) {
     this.displayName = user.displayName;
     this.uid = user.uid;
     this.email = user.email;
     this.photoURL = user.photoURL;
-    this.initial = user.displayName.slice(0, 1);
+    if (user.displayName) {
+      this.initial = user.displayName.slice(0, 1);
+    } else {
+      this.initial = '';
+    }
+
   }
 }

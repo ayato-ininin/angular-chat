@@ -34,6 +34,6 @@ export class AuthService {
   login(email: string, password: string): Promise<firebase.auth.UserCredential | void>{
     // この型指定は、もし値がかえってこれば、userCredentialが返ってきて、そうでなければ返ってこないので、voidのunion型
     return this.afAuth.signInWithEmailAndPassword(email, password)
-      .catch(error => console.log(error));
+      .catch(error => console.error(error));
   }
 }
