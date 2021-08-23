@@ -19,7 +19,7 @@ export class ChatComponent implements OnInit {
   commentsRef: AngularFireList<Comment>;
   // angularfirelistにすると、db.listの値が受け取れる。List参照が格納
 
-  currentUser!: User;
+  currentUser: User;
   comment = "";
 
 
@@ -38,10 +38,11 @@ export class ChatComponent implements OnInit {
     this.afAuth.authState.subscribe((user: firebase.User | null) => {
       if (user) {
         this.currentUser = new User(user);
+        console.log(this.currentUser);
       }
     });
 
-    this.comments$ = this.commentsRef.snapshotChanges()
+   this.comments$ = this.commentsRef.snapshotChanges()
     .pipe(
       map((snapshots: SnapshotAction<Comment>[]) => {
         // まずここでkeyを含めたメタデータを取得

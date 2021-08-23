@@ -11,7 +11,7 @@ import { NgForm } from '@angular/forms';
 export class NewUserComponent implements OnInit {
 
   constructor(
-    private UserService: UserService,
+    private userService: UserService,
     private router:Router
   ) { }
 
@@ -19,7 +19,7 @@ export class NewUserComponent implements OnInit {
   }
 
   submit(form: NgForm): void{
-    this.UserService.update(form.value)
+    this.userService.update(form.value)
       .then(() => this.router.navigateByUrl('/'));
   }
 

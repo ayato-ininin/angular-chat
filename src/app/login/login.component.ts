@@ -11,7 +11,7 @@ import { AuthService } from '../core/services/auth.service';
 export class LoginComponent implements OnInit {
 
   constructor(
-    private AuthService: AuthService,
+    private authService: AuthService,
     private router:Router
   ) { }
 
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   login(form: NgForm): void{
     const { email, password } = form.value;
-    this.AuthService.login(email, password)
+    this.authService.login(email, password)
       .then(() => this.router.navigateByUrl('/'));
   }
 

@@ -1,4 +1,4 @@
-import { ThrowStmt } from '@angular/compiler';
+
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -13,7 +13,7 @@ export class SignUpComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private UserService:UserService
+    private userService:UserService
   ) { }
 
   ngOnInit(): void {
@@ -21,7 +21,7 @@ export class SignUpComponent implements OnInit {
   signup(form: NgForm): void{
     const { email, password } = form.value;
     console.log(form.value);
-    this.UserService.create(email, password)
+    this.userService.create(email, password)
       .then(() => this.router.navigateByUrl('/users/new'))
       .catch((error:any) => console.log(error));
   }

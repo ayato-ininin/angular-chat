@@ -1,14 +1,14 @@
 export class User {
-  displayName?: string | null;
-  email: string |null;
-  photoURL?: string | null;
+  displayName: string;
+  email: string;
+  photoURL: string;
   uid: string;
-  initial?: string | undefined;
+  initial?: string;
   constructor(user: firebase.User) {
     this.displayName = user.displayName;
     this.uid = user.uid;
     this.email = user.email;
     this.photoURL = user.photoURL;
-    this.initial = user.displayName?.slice(0, 1);
+    this.initial = user.displayName.slice(0, 1);
   }
 }

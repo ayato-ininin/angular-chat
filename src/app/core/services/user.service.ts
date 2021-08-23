@@ -7,6 +7,7 @@ import { User } from '../../class/user';
   providedIn: 'root'
 })
 export class UserService {
+  Initial = '';
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -19,10 +20,11 @@ export class UserService {
         const actionCodeSettings = {
           url: `http://localhost:4200/?newAccount=true&email=${user!.email}`
         };
-        user!.sendEmailVerification(actionCodeSettings);
+        user.sendEmailVerification(actionCodeSettings);
         // this.db.object(`/users/${user!.uid}`).set({ uid: user!.uid, email: user!.email });
         // ↓のようにインスタンスにしていれると、必要なデータは全て入れれる。
-        this.db.object(`/users/${user?.uid}`).set({uid:user!.uid,email:user!.email,displayName :'',initial:'',photoURL:''});
+        this.db.object(`/users/${user.uid}`).set(new User(user))
+        .catch(error => console.error(error));
 
       })
     // createUserWithEmailAndPassword＝＞このメソッドは、firebaseのもので、promiseを返すように、設定されている。
@@ -36,12 +38,14 @@ export class UserService {
     return this.afAuth.currentUser.then((user: firebase.User | null) => {
       // そのuserデータを取ってくる。
       if (user) {
+        this.Initial = values.displayName.slice(0, 1);
         user.updateProfile(values)
 
-          // ↑ここでまず、authentificationにデータを保存！！
+          // ↑ここでまず、authentificationにデータを保存
           .then(() => this.db.object(`/users/${user.uid}`).update(values))
-          // ↑そんで、ここでリアルタイムデータベースにも保存して、二回保存！
-          .catch(error => console.log(error));
+          .then(() => this.db.object(`/users/${user.uid}`).update({ initial: this.Initial}))
+          // ↑そんで、ここでリアルタイムデータベースにも保存して、二回保存
+          .catch(error => console.error(error));
       }
     })
   }
