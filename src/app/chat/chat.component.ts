@@ -39,6 +39,7 @@ export class ChatComponent implements OnInit {
       if (user) {
         this.currentUser = new User(user);
         console.log(this.currentUser);
+        console.log(this.currentUser.initial);
       }
     });
 

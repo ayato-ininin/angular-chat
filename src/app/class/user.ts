@@ -11,9 +11,6 @@ export class User {
     this.photoURL = user.photoURL;
     if (user.displayName) {
       this.initial = user.displayName.slice(0, 1);
-    } else {
-      this.initial = '';
     }
-
   }
 }

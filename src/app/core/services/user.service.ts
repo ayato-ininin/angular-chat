@@ -7,7 +7,6 @@ import { User } from '../../class/user';
   providedIn: 'root'
 })
 export class UserService {
-  Initial = '';
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -23,9 +22,7 @@ export class UserService {
         user.sendEmailVerification(actionCodeSettings);
         // this.db.object(`/users/${user!.uid}`).set({ uid: user!.uid, email: user!.email });
         // ↓のようにインスタンスにしていれると、必要なデータは全て入れれる。
-        this.db.object(`/users/${user.uid}`).set(new User(user))
-        .catch(error => console.error(error));
-
+        this.db.object(`/users/${user.uid}`).set(new User(user));
       })
     // createUserWithEmailAndPassword＝＞このメソッドは、firebaseのもので、promiseを返すように、設定されている。
     // その下のcredentialのとこが、メール確認を送信してくれる！
